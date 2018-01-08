@@ -4,7 +4,7 @@
     <title>Dapp</title>
     <!-- <script src="/Users/tthedx/node_modules/bower_components/web3/dist/web3.min.js"></script> -->
     <script type="text/javascript">
-        var myHashEmail = "c786baa42167b57e47b09952f6783656e98cb7131fae548592265fe9cefef413";
+        var myHashEmail = 'c786baa42167b57e47b09952f6783656e98cb7131fae548592265fe9cefef413';
         var contractAddress = "0xcbbfbafedb0eb83016d2a96a4e80d30b20fa3e30";
         var contractAbi = [{"constant": false,"inputs": [{"name": "hash","type": "bytes32"}],
                             "name": "apply","outputs": [],"payable": false,"stateMutability": "nonpayable","type": "function"},
@@ -30,7 +30,7 @@
         }
 
         function setApplicationId() {
-          contractInstance.apply('c786baa42167b57e47b09952f6783656e98cb7131fae548592265fe9cefef413',function(error, result){
+          contractInstance.apply(myHashEmail,function(error, result){
                      if(!error)
                          {
                            console.log(result);
