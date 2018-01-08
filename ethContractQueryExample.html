@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+    <title>Dapp</title>
+    <!-- <script src="/Users/tthedx/node_modules/bower_components/web3/dist/web3.min.js"></script> -->
+    <script type="text/javascript">
+        var myHashEmail = "c786baa42167b57e47b09952f6783656e98cb7131fae548592265fe9cefef413";
+        var contractAddress = "0xcbbfbafedb0eb83016d2a96a4e80d30b20fa3e30";
+        var contractAbi = [{"constant": false,"inputs": [{"name": "hash","type": "bytes32"}],
+                            "name": "apply","outputs": [],"payable": false,"stateMutability": "nonpayable","type": "function"},
+                            {"constant": true,"inputs": [{"name": "email","type": "string"}],"name": "getApplicationID","outputs":
+                             [{"name": "","type": "uint256"}],"payable": false,"stateMutability": "view","type": "function"}]
+        if (typeof web3 !== 'undefined') {
+           console.log("Connected to metamask")
+            web3 = new Web3(web3.currentProvider);
+        }
+        else {
+          var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+        }
+
+        var contractInstance = web3.eth.contract(contractAbi).at(contractAddress);
+
+        function getApplicationID() {
+         contractInstance.getApplicationID("delzotto.enrico@gmail.com",function(error, result){
+                       if(!error)
+                          {
+                                document.getElementById("applicationId").innerText = result.toNumber();
+                          }
+                   });
+        }
+
+        function setApplicationId() {
+          contractInstance.apply('c786baa42167b57e47b09952f6783656e98cb7131fae548592265fe9cefef413',function(error, result){
+                     if(!error)
+                         {
+                           console.log(result);
+                         }
+                 })
+        }
+
+    </script>
+</head>
+<body>
+<h1>Interact with contract</h1>
+
+<button onclick="getApplicationID()">getApplicationID</button>
+<button onclick="setApplicationId()">setApplicationId</button>
+
+<span id="applicationId"></span> ApplicationId
+</body>
+</html>
